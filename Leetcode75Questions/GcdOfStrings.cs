@@ -1,8 +1,8 @@
 ﻿using System.Numerics;
 
-namespace Leetcode75.Questions;
+namespace Leetcode75;
 
-public partial class LeetCode75
+public abstract partial class Questions
 {
     public static string GcdOfStrings(string str1, string str2)
     {

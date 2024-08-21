@@ -7,41 +7,33 @@ public abstract partial class Questions
 {
     public static string ReverseWords(string s)
     {
-        s = s.Trim();
-        var result = new StringBuilder();
-        var wordStack = new Stack<string>();
-        var singleWord = new StringBuilder();
-        var whiteSpaceSkipped = false;
-        for (int i = 0; i <= s.Length; i++)
+        var words = new List<string>();
+        var word = new StringBuilder();
+        var insideWord = false;
+
+        foreach (var ch in s)
         {
-            if (i == s.Length)
+            if (!char.IsWhiteSpace(ch))
             {
-                wordStack.Push(singleWord.ToString());
-                continue;
+                word.Append(ch);
+                insideWord = true;
             }
-            if (char.IsWhiteSpace(s[i]) && !whiteSpaceSkipped)
+            else if (insideWord)
             {
-                wordStack.Push(singleWord.ToString());
-                singleWord.Clear();
-                whiteSpaceSkipped = true;
-            }
-            else if(char.IsWhiteSpace(s[i]) && whiteSpaceSkipped)
-            {
-                continue;
-            }
-            else
-            {
-                singleWord.Append(s[i]);
-                whiteSpaceSkipped = false;
+                words.Add(word.ToString());
+                word.Clear();
+                insideWord = false;
             }
         }
 
-        foreach (var word in wordStack.ToList())
+        // Add the last word if there was no trailing space
+        if (insideWord)
         {
-            result.Append(wordStack.Pop() + " ");
-            
+            words.Add(word.ToString());
         }
-        
-        return result.ToString().Trim();
+
+        // Reverse the list of words and join them with a single space
+        words.Reverse();
+        return string.Join(" ", words);
     }
 }

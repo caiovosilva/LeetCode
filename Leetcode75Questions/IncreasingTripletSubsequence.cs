@@ -1,7 +1,4 @@
-﻿using System.Text;
-using Microsoft.VisualBasic.CompilerServices;
-
-namespace Leetcode75;
+﻿namespace Leetcode75;
 
 public abstract partial class Questions
 {
